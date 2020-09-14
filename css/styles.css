@@ -1234,7 +1234,9 @@ main .down svg {
     width: 197px;
     margin-bottom: 0;
 }
-
+.off {
+    display: none;
+}
 
 .gifts-block {
     position: relative;

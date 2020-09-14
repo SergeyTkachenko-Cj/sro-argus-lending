@@ -299,10 +299,11 @@ $(function () {
 			currentStepInput = currentStep.find('input'),
 			steps = $('.steps-content .step'),
 			index = getCurrentIndex('.steps-content .step');
+
 		if (index < steps.length - 2) {
 			for (var i = 0; i < currentStepInput.length; i++) {
 				if (currentStepInput.eq(i).prop('checked')) {
-					moveToNextStep();
+					moveToNextStep(currentStepInput[i].value);
 					break;
 				}
 			}
@@ -323,7 +324,7 @@ $(function () {
 		}
 	});
 
-	function moveToNextStep() {
+	function moveToNextStep(check) {
 		var current = $('.step.active.current'),
 			currentContent = $('.steps-content .step.active'),
 			steps = $('.steps-content .step');
@@ -335,7 +336,23 @@ $(function () {
 		}
 		steps.removeClass('active');
 		currentContent.next().addClass('active');
+
+			const customSums = check => {			// different sums for different SROs
+				const sroStroy = $('.stroy');
+				const sroOther = $('.proekt-izisk');
+					if (check === 'CPO строителей') {
+						sroStroy.removeClass('off');
+						sroOther.addClass('off');
+					}
+					else {
+						sroOther.removeClass('off');
+						sroStroy.addClass('off');
+					}
+			}
+		
+		customSums(check);
 	}
+
 	function getCurrentIndex(arr) {
 		return $(arr).index($(arr + '.active'));
 	}

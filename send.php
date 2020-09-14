@@ -33,6 +33,8 @@
         $limit = '<p><b>Срок оформления допуска СРО: </b>' .$_POST['limit'].'</p>';
     }
 
+    // $to = 'tka4inni@gmail.com';
+
     $to = '131@argus-eko.ru, margo@argus-eko.ru';
     $subject = 'Заявка с sro.argus-eko.ru';
     $message = '
