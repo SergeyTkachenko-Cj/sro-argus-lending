@@ -279,16 +279,37 @@ $(function () {
 	}
 
 	function validateForm(form) {
-		form.find('label input').each(function () {
-			if ($(this).val() === '') {
-				$(this).addClass('error');
-			} else {
-				$(this).removeClass('error');
-			}
-		});
 
-		return form.find('.error').length === 0;
-	}
+		function validateEmail(email) {
+			var re = /\S+@\S+\.\S+/;
+			return re.test(email.trim());
+		}
+
+		function validatePhone(phone) {
+			var re = /^\+?[0-9]+$/;
+			return re.test(phone.trim());
+		}
+
+			form.find('label input').each(function () {
+				if ($(this).val() === '' && this.name !== 'hidden-captcha') {
+					$(this).addClass('error');
+				} 
+				else if (this.name === 'hidden-captcha' && $(this).val() !== '') {	// Anti-robots trick
+					$(this).addClass('error');
+				}
+				else if (this.name === 'email' && !validateEmail($(this).val())) {
+					$(this).addClass('error');
+				}
+				else if (this.name === 'phone' && !validatePhone($(this).val())) {
+					$(this).addClass('error');
+				}
+				else {
+					$(this).removeClass('error');
+				}
+			});
+		
+			return form.find('.error').length === 0;
+	}		
 
 	function clearTimer(timer) {
 		timer && clearTimeout(timer);

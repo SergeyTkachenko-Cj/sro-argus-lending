@@ -1,16 +1,16 @@
 <?
     if(isset($_POST['name'])) {
-        $name = '<p><b>Имя: </b>'.$_POST['name'].'</p>';
+        $name = '<p>name: '.$_POST['name'].'</p>';
     }
     if(isset($_POST['phone'])) {
-        $phone = '<p><b>Телефон: </b>'.$_POST['phone'].'</p>';
+        $phone = '<p>phone: '.$_POST['phone'].'</p>';
     }
     if(isset($_POST['email'])) {
-        $email = '<p><b>Email: </b>'.$_POST['email'].'</p>';
+        $email = '<p>email: '.$_POST['email'].'</p>';
     }
-    if(isset($_POST['from'])) {
-        $downloadedFile = '<p><b>Откуда: </b>'.$_POST['from'].'</p>';
-    }
+    // if(isset($_POST['from'])) {
+    //     $downloadedFile = '<p><b>Откуда: </b>'.$_POST['from'].'</p>';
+    // }
     if(isset($_POST['cpo'])) {
         $cpo = '<p style="margin-top: 2rem;"></p><p><b>Тип СРО: </b>' .$_POST['cpo'].'</p>';
     }
@@ -35,8 +35,8 @@
 
     // $to = 'tka4inni@gmail.com';
 
-    $to = '131@argus-eko.ru, margo@argus-eko.ru';
-    $subject = 'Заявка с sro.argus-eko.ru';
+    $to = 'advertising@argus-eko.ru, margo@argus-eko.ru';
+    $subject = 'Отправили заявку с sro.argus-eko';
     $message = '
                     <html>
                         <head>
@@ -46,6 +46,7 @@
                             '. $name .'
                             '. $phone .'
                             '. $email .'
+                            '. $subject .'
                             '. $downloadedFile .'
                             '. $cpo .'
                             '. $sum .'

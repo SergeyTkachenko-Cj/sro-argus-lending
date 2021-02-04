@@ -37,6 +37,23 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/66420493" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     <!-- /Yandex.Metrika counter -->
+    <!-- Facebook Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '331427398204438');
+        fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=331427398204438&ev=PageView&noscript=1"/>
+    </noscript>
+    <!-- /Facebook Pixel -->
 </head>
 <body>
 
@@ -68,14 +85,14 @@
                     <h1 class="title">
                         Вступление в надёжное <br>
                         <span class="green-text">СРО во всех регионах РФ</span> <br>
-                        “Под ключ” за 2 дня!
+                        всего за 2 дня!
                     </h1>
                 </div>
                 <div class="left">
                     <h1 class="title">
                         Вступление в надёжное <br>
                         <span class="green-text">СРО во всех регионах РФ</span> <br>
-                        “Под ключ” за 2 дня!
+                        всего за 2 дня!
                     </h1>
                     <button class="green-btn green-border count-price request">
                         Оставить заявку
@@ -985,7 +1002,7 @@
                         </svg>
                     </div>
                     <p class="text">
-                        <b>Выполнение работ «под ключ». </b>
+                        <b>Выполнение работ «от и до». </b>
                         Вам практически ничего не нужно делать, всё на нас.
                     </p>
                 </div>
@@ -1975,7 +1992,7 @@
                                 <input type="email" class="input" name="email" placeholder="Ваш e-mail" id="email">
                             </label>
                             <input type="hidden" name="from" value="Заявка с формы в внизу">
-
+                            <label><input type="text" name="hidden-captcha" hidden /></label>
                             <button class="bot-send-btn green-btn">Оставить заявку <span class="hide-mobile">на обратный звонок</span></button>
                             <p class="text">Нажимая кнопку Вы соглашаетесь с <a href="terms.html" target="_blank" rel="noopener noreferrer" class="link underline">политикой конфедициальности</a></p>
                             <input type="submit" hidden>
@@ -2111,6 +2128,7 @@
         <label><input type="text" class="input" name="phone" placeholder="Ваш телефон"></label>
         <label><input type="text" class="input" name="email" placeholder="Ваш e-mail"></label>
         <input type="hidden" name="from" value="Заявка на обратный звонок">
+        <label><input type="text" name="hidden-captcha" hidden /></label>
         <input type="submit" hidden>
         <button class="sbmt-btn send-btn green-btn" type="submit">Отправить заявку</button>
         <p class="policy-text">
@@ -2149,6 +2167,7 @@
         <label><input type="text" class="input" name="phone" placeholder="Ваш телефон"></label>
         <label><input type="text" class="input" name="email" placeholder="Ваш e-mail"></label>
         <input type="hidden" name="from" value="Заявка на вступление в CPO">
+        <label><input type="text" name="hidden-captcha" hidden /></label>
         <input type="submit" hidden>
         <button class="sbmt-btn send-btn green-btn" type="submit">Оставить заявку</button>
         <p class="policy-text">
@@ -2196,6 +2215,7 @@
         <input type="hidden" name="limit">
 
         <input type="hidden" name="from" value="Заявка с квиза">
+        <label><input type="text" name="hidden-captcha" hidden /></label>
         <input type="submit" hidden>
         <button class="sbmt-btn send-btn green-btn" type="submit">Оставить заявку</button>
         <p class="policy-text">
