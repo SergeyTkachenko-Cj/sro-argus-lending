@@ -28,7 +28,7 @@ try {
     $mail->Host = 'smtp.yandex.com';  // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
     $mail->Username = 'argus@argus.group';                // SMTP username
-    $mail->Password = 'plSYrr4r';                         // SMTP password
+    $mail->Password = 'ARkeyf20';                         // SMTP password
     $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = 465;                                    // TCP port to connect to
 

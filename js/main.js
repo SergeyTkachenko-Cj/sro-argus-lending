@@ -47,6 +47,10 @@ $(function () {
 		var modal = $('.form-2');
 		modal.addClass('opened').stop().fadeIn();
 	});
+	$('.request-vipiska').on('click', function () {
+		var modal = $('.form-4');
+		modal.addClass('opened').stop().fadeIn();
+	});
 
 	var prevArrow = '<button class="prev-btn">\n' +
 		'                    <svg width="15" height="21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"\n' +
