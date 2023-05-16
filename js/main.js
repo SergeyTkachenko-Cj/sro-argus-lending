@@ -47,8 +47,16 @@ $(function () {
 		var modal = $('.form-2');
 		modal.addClass('opened').stop().fadeIn();
 	});
-	$('.request-vipiska').on('click', function () {
+	$('.request-kp').on('click', function () {
 		var modal = $('.form-4');
+		modal.addClass('opened').stop().fadeIn();
+	});
+	$('.request-price').on('click', function () {
+		var cost = $(this).attr('data-cost');
+		var volts = $(this).attr('data-volts');
+		var pack = $(this).attr('data-pack');
+		$('.hidden-price').attr('value', `Цeна: ${cost} \nВольты: ${volts} \nПакет: ${pack}`)
+		var modal = $('.form-3');
 		modal.addClass('opened').stop().fadeIn();
 	});
 
@@ -179,8 +187,13 @@ $(function () {
 		}
 	});
 
+	// $('.toggle-list').on('click', function () {
+	// 	$(this).parents('.document-list-block').toggleClass('active').find('.document-list.hidden').stop().slideToggle();
+	// });
+
 	$('.toggle-list').on('click', function () {
-		$(this).parents('.document-list-block').toggleClass('active').find('.document-list.hidden').stop().slideToggle();
+		var ths = $(this).attr('data-tog');
+		$(this).parents('.faq-block').toggleClass('active').find(`.document-list.${ths}.hidden`).stop().slideToggle();
 	});
 
 	$('.sbmt-btn').on('click', function (e) {
@@ -214,10 +227,28 @@ $(function () {
 
 	$('.bot-send-btn').on('click', function (e) {
 		e.preventDefault();
-
+		var fileList = ['./assets/download/Instruction a4 qr.png'];
+		var fileListName = ['Пошаговая инструкция для подачи заявки на сдачу квалификационного экзамена.png'];
 		var form = $(this).parents('.form');
+		var email = $(this).parents('.form').find('input[name="email"]').val();
 
-		if (validateForm(form)) sendForm(form);
+		if (validateForm(form)) {
+			sendMultipleFiles(fileList, fileListName, email);
+			sendForm(form);
+		}
+	});
+
+	$('.bot-send-btn-II').on('click', function (e) {
+		e.preventDefault();
+		var fileList = ['./assets/download/список документов для регистрации работодателя.pdf'];
+		var fileListName = ['список документов для регистрации работодателя.pdf'];
+		var form = $(this).parents('.form');
+		var email = $(this).parents('.form').find('input[name="email"]').val();
+
+		if (validateForm(form)) {
+			sendMultipleFiles(fileList, fileListName, email);
+			sendForm(form);
+		}
 	});
 
 	$('.form label input').on('keyup', function () {
@@ -278,6 +309,14 @@ $(function () {
 		$.ajax({
 			type: 'POST',
 			url: 'sendFiles.php',
+			data: 'email=' + email + '&files=' + JSON.stringify(fileList) + '&fileNames=' + JSON.stringify(fileListName)
+		});
+	}
+
+	function sendMultipleFilesII(fileList, fileListName, email) {
+		$.ajax({
+			type: 'POST',
+			url: 'sendFilesII.php',
 			data: 'email=' + email + '&files=' + JSON.stringify(fileList) + '&fileNames=' + JSON.stringify(fileListName)
 		});
 	}

@@ -1,64 +1,72 @@
-<?
-    if(isset($_POST['name'])) {
-        $name = '<p>name: '.$_POST['name'].'</p>';
+<?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+header('Pragma: public');
+header('Access-Control-Allow-Origin: *');
+
+require './PHPMailer/Exception.php';
+require './PHPMailer/PHPMailer.php';
+require './PHPMailer/SMTP.php';
+
+    if (isset($_POST['name'])) {
+        $name = $_POST['name'];
     }
-    if(isset($_POST['phone'])) {
-        $phone = '<p>phone: '.$_POST['phone'].'</p>';
+    if (isset($_POST['phone'])) {
+        $phone = $_POST['phone'];
     }
-    if(isset($_POST['email'])) {
-        $email = '<p>email: '.$_POST['email'].'</p>';
+    if (isset($_POST['email'])) {
+        $email = $_POST['email'];
     }
-    // if(isset($_POST['from'])) {
-    //     $downloadedFile = '<p><b>Откуда: </b>'.$_POST['from'].'</p>';
-    // }
-    if(isset($_POST['cpo'])) {
-        $cpo = '<p style="margin-top: 2rem;"></p><p><b>Тип СРО: </b>' .$_POST['cpo'].'</p>';
+    if (isset($_POST['from'])) {
+        $from = $_POST['from'];
     }
-    if(isset($_POST['sum'])) {
-        $sum = '<p><b>Сумма договора: </b>' .$_POST['sum'].'</p>';
-    }
-    if(isset($_POST['city'])) {
-        $city = '<p><b>Ваш город: </b>' .$_POST['city'].'</p>';
-    }
-    if(isset($_POST['tenders'])) {
-        $tenders = '<p><b>Участие в гостендерах: </b>' .$_POST['tenders'].'</p>';
-    }
-    if(isset($_POST['objects'])) {
-        $objects = '<p><b>Ваши объекты: </b>' .$_POST['objects'].'</p>';
-    }
-    if(isset($_POST['specialist'])) {
-        $specialist = '<p><b>Специалисты для НРС: </b>' .$_POST['specialist'].'</p>';
-    }
-    if(isset($_POST['limit'])) {
-        $limit = '<p><b>Срок оформления допуска СРО: </b>' .$_POST['limit'].'</p>';
+    if (isset($_POST['price'])) {
+        $price = $_POST['price'];
     }
 
-    // $to = 'tka4inni@gmail.com';
+    $heading = $from;
 
-    $to = 'advertising@argus-eko.ru, margo@argus-eko.ru';
-    $subject = 'Отправили заявку с sro.argus-eko';
-    $message = '
-                    <html>
-                        <head>
-                            <title>'.$subject.'</title>
-                        </head>
-                        <body>
-                            '. $name .'
-                            '. $phone .'
-                            '. $email .'
-                            '. $subject .'
-                            '. $downloadedFile .'
-                            '. $cpo .'
-                            '. $sum .'
-                            '. $city .'
-                            '. $tenders .'
-                            '. $objects .'
-                            '. $specialist .'
-                            '. $limit .'
-                        </body>
-                    </html>';
-    $headers  = "Content-type: text/html; charset=utf-8 \r\n";
-    $headers .= "From: Argus <argus@argous.group>\r\n";
-    mail($to, $subject, $message, $headers);
+    $subject = $heading;
+    $message = "name: $name\n<br />\n<br />phone: $phone\n<br />\n<br />email: $email\n<br />\n<br />$heading\n<br />\n<br />$price";
+    $html = '<html><head><meta http-equiv="content-type" content="text/html; charset=utf-8"></head><body>'.$message.'</body></html>';
 
+//Load Composer's autoloader
+$mail = new PHPMailer(true);                              // Passing `true` enables exceptions
+try {
+    $mail->CharSet = 'UTF-8';
+    $mail->isSMTP();                                      // Set mailer to use SMTP
+    $mail->Host = 'smtp.yandex.com';                      // Specify main and backup SMTP servers
+    $mail->SMTPAuth = true;                               // Enable SMTP authentication
+    $mail->Username = 'argus@argus.group';                // SMTP username
+    $mail->Password = 'ARkeyf31';                         // SMTP password
+    $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+    $mail->Port = 465;                                    // TCP port to connect to
+
+    //Recipients
+    $mail->From='argus@argus.group';
+    $mail->FromName = 'Argus';
+    $mail->addAddress("tka4inni@gmail.com", "АРГУС");     // Add a recipient
+
+    // $recipients = array(
+    //     'advertising@argus-eko.ru' => 'АРГУС',
+    //     'margo@argus-eko.ru' => 'АРГУС',
+    //  );
+    //  foreach($recipients as $email => $name)
+    //  {
+    //     $mail->addAddress($email, $name);
+    //  }
+
+    //Content
+    $mail->isHTML(true);                                  // Set email format to HTML
+    $mail->Subject = "=?UTF-8?B?".base64_encode($subject)."?=";
+    $mail->Body    = $html;
+    $mail->AltBody = $message;
+    $mail->send();
+    $return = true;
+    echo json_encode($return);
+    } 
+    catch (Exception $e) {
+    $return = false;
+    echo json_encode($return);
+}
 ?>
